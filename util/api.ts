@@ -33,3 +33,20 @@ export const updateEntry = async (id, content) => {
     throw new Error("Failed to update entry")
   }
 }
+
+export const askQuestion = async (question) => {
+  const res = await fetch(
+    new Request(
+      createURL("/api/question"), {
+      method: "POST",
+      body: JSON.stringify({ question })
+    })
+  )
+  console.log(res)
+  if (res.ok) {
+    const data = await res.json()
+    return data.data
+  } else {
+    throw new Error("Failed to send question")
+  }
+}
